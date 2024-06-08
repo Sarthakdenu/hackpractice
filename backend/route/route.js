@@ -1,0 +1,22 @@
+const express = require('express')
+const Router = express.Router()
+
+const {createuser} = require('../controller/createuser')
+const {getinfo} = require('../controller/getuser')
+const {updateuser} = require('../controller/updateuser')
+const {deleteuser} = require('../controller/deleteuser')
+const {register} = require('../controller/register')
+const {login} = require('../controller/login')
+const {authorization,isadmin}=require('../middleware/auth')
+const {uploadfile} = require('../controller/fileupload')
+const {imageupload}= require('../controller/imageuploader')
+Router.post('/createuser',createuser)
+Router.get('/getinfo',getinfo)
+Router.put('/updateuser',updateuser)
+Router.delete('/deleteuser',deleteuser)
+Router.post('/register',register)
+Router.post('/login',authorization,isadmin,login)
+Router.post('/uploadfile',uploadfile)
+Router.post('/imageupload',imageupload)
+
+module.exports = Router
